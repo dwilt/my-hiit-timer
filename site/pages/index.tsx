@@ -1,7 +1,25 @@
 import Head from 'next/head';
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from '../components/LoginButton';
+import LogoutButton from '../components/LogoutButton';
+import { pingPrivate, pingPublic, requestApi } from '../utils/api';
 import styles from '../styles/Home.module.css';
+import config from '../config';
 
 export default function Home() {
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
+  console.log({ isAuthenticated, user });
+
+  const onTestApis = async () => {
+    const accessToken = await getAccessTokenSilently();
+    console.log({ accessToken })
+    const [publicResp, privateResp] = await Promise.all([
+      await pingPublic(), 
+      await pingPrivate(accessToken)
+    ]);
+    console.log({ publicResp, privateResp });
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -47,6 +65,12 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+        </div>
+        <div>
+          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+        </div>
+        <div>
+          <button onClick={onTestApis}>test apis</button>
         </div>
       </main>
 

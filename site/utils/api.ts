@@ -31,14 +31,14 @@ export const userGet = async (token) => {
  * testPublic
  */
 export const pingPublic = async () => {
-  return await requestApi('/public', 'GET', null)
+  return await requestApi('/api/public', 'GET', null)
 }
 
 /**
  * testPrivate
  */
 export const pingPrivate = async (token) => {
-  return await requestApi('/private', 'GET', null, {
+  return await requestApi('/api/private', 'GET', null, {
     Authorization: `Bearer ${token}`
   })
 }
