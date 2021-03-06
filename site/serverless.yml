@@ -9,3 +9,6 @@ inputs:
     dist: build
   # Enable this when you want to set a custom domain.
   # domain: ${env:domain}
+
+site:
+  component: '@sls-next/serverless-component@1.18.0'
