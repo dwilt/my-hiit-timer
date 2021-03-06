@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { requestApi } from '../utils/api';
 
-export default function Home({ peeps }: { peeps: { name: string }[] }) {
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
