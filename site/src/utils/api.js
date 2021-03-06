@@ -28,6 +28,22 @@ export const userGet = async (token) => {
 }
 
 /**
+ * testPublic
+ */
+export const pingPublic = async () => {
+  return await requestApi('/public', 'GET', null)
+}
+
+/**
+ * testPrivate
+ */
+export const pingPrivate = async (token) => {
+  return await requestApi('/private', 'GET', null, {
+    Authorization: `Bearer ${token}`
+  })
+}
+
+/**
  * API request to call the backend
  */
 export const requestApi = async (
