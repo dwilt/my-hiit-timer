@@ -2,16 +2,6 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { requestApi } from '../utils/api';
 
-export async function getServerSideProps(context) {
-  const peeps = await requestApi('/test');
-
-  return {
-    props: {
-      peeps,
-    }, // will be passed to the page component as props
-  };
-}
-
 export default function Home({ peeps }: { peeps: { name: string }[] }) {
   return (
     <div className={styles.container}>
@@ -19,12 +9,6 @@ export default function Home({ peeps }: { peeps: { name: string }[] }) {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <ul>
-        {peeps.map(({ name }, i) => (
-          <li key={i}>{name}</li>
-        ))}
-      </ul>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
