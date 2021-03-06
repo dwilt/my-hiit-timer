@@ -1,8 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import { Auth0Provider } from "@auth0/auth0-react";
-import '../styles/globals.css'
+import React from 'react';
+import { Auth0Provider } from '@auth0/auth0-react';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     >
       <Component {...pageProps} />
     </Auth0Provider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
