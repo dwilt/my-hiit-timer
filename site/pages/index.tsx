@@ -5,6 +5,8 @@ import LogoutButton from '../components/LogoutButton';
 import { pingPrivate, pingPublic, requestApi } from '../utils/api';
 import styles from '../styles/Home.module.css';
 import config from '../config';
+import { Button } from '@material-ui/core';
+
 
 export default function Home() {
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
@@ -14,7 +16,7 @@ export default function Home() {
     const accessToken = await getAccessTokenSilently();
     console.log({ accessToken })
     const [publicResp, privateResp] = await Promise.all([
-      await pingPublic(), 
+      await pingPublic(),
       await pingPrivate(accessToken)
     ]);
     console.log({ publicResp, privateResp });
@@ -26,6 +28,10 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Button variant="contained" color="primary">
+          Hello World asdf
+      </Button>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
