@@ -6,7 +6,19 @@ import { pingPrivate, pingPublic, requestApi } from '../utils/api';
 import styles from '../styles/Home.module.css';
 import config from '../config';
 import { Button } from '@material-ui/core';
+import styled from 'styled-components';
+import Link from 'next/link';
 
+const MyButton = styled.button`
+  background: palevioletred;
+  border-radius: 3px;
+  border: none;
+  color: white;
+
+  @media (max-width: 768px) {
+    background: blue;
+  }
+`;
 
 export default function Home() {
   const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
@@ -14,13 +26,13 @@ export default function Home() {
 
   const onTestApis = async () => {
     const accessToken = await getAccessTokenSilently();
-    console.log({ accessToken })
+    console.log({ accessToken });
     const [publicResp, privateResp] = await Promise.all([
       await pingPublic(),
-      await pingPrivate(accessToken)
+      await pingPrivate(accessToken),
     ]);
     console.log({ publicResp, privateResp });
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -29,9 +41,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Button variant="contained" color="primary">
-          Hello World asdf
-      </Button>
+      <Link href="/about">
+        <Button variant="contained" color="primary">
+          About
+        </Button>
+      </Link>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
@@ -72,9 +86,7 @@ export default function Home() {
             </p>
           </a>
         </div>
-        <div>
-          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-        </div>
+        <div>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>
         <div>
           <button onClick={onTestApis}>test apis</button>
         </div>
